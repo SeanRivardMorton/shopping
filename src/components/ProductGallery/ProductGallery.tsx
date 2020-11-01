@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Grid,
-  Paper,
   Card,
   CardContent,
   CardActions,
@@ -12,7 +11,6 @@ import { Products, Cost } from "../../types";
 import styled from "styled-components";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
-import { useTheme } from "@material-ui/core/styles";
 
 const ProductCard = styled(Card)`
   ${({ theme }) => `
@@ -29,7 +27,13 @@ const parseCost = (cost: Cost): number | string => {
   return `${cost.amount}/${cost.per}`;
 };
 
-export const ProductGallery = ({ products }: { products: Products }) => {
+export const ProductGallery = ({
+  products,
+  dispatchBasket,
+}: {
+  products: Products;
+  dispatchBasket: any;
+}) => {
   return (
     <Grid justify="space-around" container spacing={2}>
       {Object.entries(products).map(([id, product]) => {
@@ -43,12 +47,25 @@ export const ProductGallery = ({ products }: { products: Products }) => {
                 <Typography>{parseCost(product.cost)}</Typography>
               </CardContent>
               <CardActions>
-                <IconButton title={`add ${product.name}`} aria-label="add">
+                <IconButton
+                  title={`add ${product.name}`}
+                  aria-label="add"
+                  onClick={() =>
+                    dispatchBasket({ key: id, type: "ADD", payload: product })
+                  }
+                >
                   <AddIcon />
                 </IconButton>
                 <IconButton
                   title={`remove ${product.name}`}
                   aria-label="remove"
+                  onClick={() =>
+                    dispatchBasket({
+                      key: id,
+                      type: "REMOVE",
+                      payload: product,
+                    })
+                  }
                 >
                   <RemoveIcon />
                 </IconButton>
