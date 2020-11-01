@@ -13,6 +13,12 @@ const BasketPaper = styled(Paper)`
 const BasketUnorderedList = styled.ul`
   list-style-type: none;
   padding: 0px;
+  li {
+    display: flex;
+    .title {
+      width: 60%;
+    }
+  }
 `;
 
 const parseProductPrice = ({
@@ -38,12 +44,15 @@ export const Basket = ({ basket }: { basket: BasketInterface }) => {
       <BasketUnorderedList>
         {Object.entries(basket).map(([id, product]: [string, any]) => {
           const parsedProduct = parseProductPrice(product);
-          return (
-            <li key={id}>
-              {parsedProduct.description}
-              {parsedProduct.price}
-            </li>
-          );
+          if (product.quantity < 1) return null;
+          return [...Array(product.quantity)].map((_, index) => {
+            return (
+              <li key={`${id}-${index}`}>
+                <span className="title">{parsedProduct.description}</span>
+                {parsedProduct.price.toFixed(2)}
+              </li>
+            );
+          });
         })}
       </BasketUnorderedList>
     </BasketPaper>

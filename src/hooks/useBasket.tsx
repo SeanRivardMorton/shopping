@@ -15,7 +15,7 @@ const reducer = (draft: any, action: any) => {
         quantity: draft[action.key]?.quantity || 0,
       };
       draft[action.key].quantity -= 1;
-      if (draft[action.key]?.quantity === 0) {
+      if (draft[action.key]?.quantity < 1) {
         delete draft[action.key];
       }
       return draft;
