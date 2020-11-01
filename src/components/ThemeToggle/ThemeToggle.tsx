@@ -4,7 +4,7 @@ import { Switch, FormControlLabel, FormGroup } from "@material-ui/core";
 
 const ToggleFormGroup = styled(FormGroup)`
   ${({ theme }) => `
-        // margin: ${theme.spacing(3)}px;
+        margin-left: ${theme.spacing(3)}px;
         color: ${theme.palette.text.primary};
         position: fixed;
     `}

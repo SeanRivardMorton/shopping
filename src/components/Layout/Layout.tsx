@@ -1,10 +1,11 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 import styled from "styled-components";
-import { useTheme } from "@material-ui/core/styles";
 
 const StyledContainer = styled(Container)`
-  padding: 48px;
+  ${({ theme }) => `
+    padding: ${theme.spacing(8)}px;
+  `}
 `;
 
 const StyledPage = styled.div`
@@ -15,8 +16,6 @@ const StyledPage = styled.div`
 `;
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
-  const theme = useTheme();
-  console.log(theme);
   return (
     <StyledPage>
       <StyledContainer>
