@@ -1,10 +1,23 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Button from "@material-ui/core/Button";
+import { Layout } from "./components/Layout";
+import { Grid } from "@material-ui/core";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Layout>
+        <Grid container spacing={3}>
+          <Grid item lg={7} xs={12}>
+            <div>products</div>
+          </Grid>
+          <Grid item lg={5} xs={12}>
+            <div>basket</div>
+          </Grid>
+        </Grid>
+      </Layout>
+    </div>
+  );
 }
 
 export default App;
