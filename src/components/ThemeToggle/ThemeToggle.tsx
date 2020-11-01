@@ -1,19 +1,39 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 import styled from "styled-components";
+import { Switch, FormControlLabel, FormGroup } from "@material-ui/core";
 
-const ThemeToggleButton = styled(Button)`
-  /* position: fixed; */
+const ToggleFormGroup = styled(FormGroup)`
+  ${({ theme }) => `
+        // margin: ${theme.spacing(3)}px;
+        color: ${theme.palette.text.primary};
+        position: fixed;
+    `}
 `;
 
-export const ThemeToggle = ({ setIsDark }: any): React.ReactElement => {
+export const ThemeToggle = ({
+  isDark,
+  setIsDark,
+}: {
+  isDark: boolean;
+  setIsDark: any;
+}): React.ReactElement => {
   return (
-    <ThemeToggleButton
-      color="primary"
-      variant="contained"
-      onClick={() => setIsDark((isDark: boolean) => !isDark)}
-    >
-      toggle theme
-    </ThemeToggleButton>
+    <ToggleFormGroup>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={isDark}
+            onChange={() =>
+              setIsDark((isDark: boolean) => {
+                return !isDark;
+              })
+            }
+            name="isDark"
+            color="primary"
+          />
+        }
+        label="Toggle Theme"
+      />
+    </ToggleFormGroup>
   );
 };

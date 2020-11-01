@@ -5,19 +5,23 @@ import { Grid } from "@material-ui/core";
 import { ProductGallery } from "./components/ProductGallery";
 import productData from "./shopData.json";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
-import themes from "./themes";
 import { ThemeProvider } from "styled-components";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 function App() {
   const [isDark, setIsDark] = React.useState(true);
-  const theme = isDark ? themes.darkTheme : themes.lightTheme;
+  const theme = createMuiTheme({
+    palette: {
+      type: isDark ? "dark" : "light",
+    },
+  });
 
   return (
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
+        <ThemeToggle isDark={isDark} setIsDark={setIsDark} />
         <Layout>
-          <ThemeToggle setIsDark={setIsDark} />
           <Grid container spacing={3}>
             <Grid item lg={7} xs={12}>
               <ProductGallery products={productData} />

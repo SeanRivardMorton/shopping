@@ -1,18 +1,27 @@
 import React from "react";
-import { Grid, Paper, Card, Typography, IconButton } from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
 import { Products, Cost } from "../../types";
 import styled from "styled-components";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import { useTheme } from "@material-ui/core/styles";
 
 const ProductCard = styled(Card)`
-  width: 150px;
-  padding: 8px;
-  margin: 16px;
-  .title {
-    font-size: 18px;
-    font-weight: 400;
-  }
+  ${({ theme }) => `
+    width: 200px;
+    .title {
+        font-size: ${theme.typography.h6.fontSize};
+        font-weight: 400;
+    }
+    `}
 `;
 
 const parseCost = (cost: Cost): number | string => {
@@ -22,16 +31,18 @@ const parseCost = (cost: Cost): number | string => {
 
 export const ProductGallery = ({ products }: { products: Products }) => {
   return (
-    <Paper>
-      <Grid container spacing={3}>
-        {Object.entries(products).map(([id, product]) => {
-          return (
-            <Grid key={id} item lg={3}>
-              <ProductCard>
+    <Grid justify="space-around" container spacing={2}>
+      {Object.entries(products).map(([id, product]) => {
+        return (
+          <Grid key={id} item>
+            <ProductCard>
+              <CardContent>
                 <Typography component="h3" className="title">
                   {product.name}
                 </Typography>
                 <Typography>{parseCost(product.cost)}</Typography>
+              </CardContent>
+              <CardActions>
                 <IconButton title={`add ${product.name}`} aria-label="add">
                   <AddIcon />
                 </IconButton>
@@ -41,13 +52,13 @@ export const ProductGallery = ({ products }: { products: Products }) => {
                 >
                   <RemoveIcon />
                 </IconButton>
-              </ProductCard>
-            </Grid>
-          );
-        })}
+              </CardActions>
+            </ProductCard>
+          </Grid>
+        );
+      })}
 
-        <Grid item lg={4}></Grid>
-      </Grid>
-    </Paper>
+      <Grid item lg={4}></Grid>
+    </Grid>
   );
 };

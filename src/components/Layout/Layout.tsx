@@ -19,7 +19,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   console.log(theme);
   return (
     <StyledPage>
-      <StyledContainer maxWidth="lg">
+      <StyledContainer>
         <>{children}</>
       </StyledContainer>
     </StyledPage>
