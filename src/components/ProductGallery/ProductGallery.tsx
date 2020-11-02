@@ -31,12 +31,12 @@ export const ProductGallery = ({
   products,
   dispatchBasket,
 }: {
-  products: Products;
+  products: any;
   dispatchBasket: any;
 }) => {
   return (
     <Grid justify="space-around" container spacing={2}>
-      {Object.entries(products).map(([id, product]) => {
+      {Object.entries(products).map(([id, product]: [string, any]) => {
         return (
           <Grid key={id} item>
             <ProductCard>

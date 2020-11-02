@@ -7,9 +7,19 @@ export type Cost =
       amount: number;
     };
 
+type DiscountTypes = "bogo" | "multibuy" | "bundle";
+
+export type Discount = {
+  type: string = DiscountTypes;
+  amount: number;
+  for?: number;
+};
+
 export interface Product {
   name: string;
   cost: Cost | number;
+  discounts?: Discounts[];
+  quantity?: number;
 }
 export interface BasketProduct extends Product {
   quantity: number;
