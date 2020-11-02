@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  Grid,
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-  IconButton,
-} from "@material-ui/core";
+import { Grid, Card, CardContent, Typography } from "@material-ui/core";
 import { Cost } from "../../types";
 import styled from "styled-components";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
+
 import { ProductByUnitActions } from "./ProductByUnitActions";
 import { ProductByVolumeActions } from "./ProductByVolumeActions";
 
