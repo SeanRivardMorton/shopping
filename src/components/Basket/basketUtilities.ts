@@ -60,37 +60,15 @@ export const getAppliedDiscounts = (basket: Basket) => {
   return discounts;
 };
 
-// export const getAppliedDiscounts = (basket: any) => {
-//   return Object.values(basket).reduce((totalDiscount: number, product: any) => {
-//     totalDiscount += Number(getProductDiscount(product)?.savings) || 0;
-//     return Number(totalDiscount);
-//   }, 0);
-// };
+export const getDiscountedTotal = (basket: Basket) => {
+  return getAppliedDiscounts(basket).reduce((savings: any, discount: any) => {
+    savings += discount.savings;
+    return savings;
+  }, 0);
+};
 
-// export const getProductDiscount = (product: any) => {
-//   switch (product?.discount?.type) {
-//     case "bogo":
-//       return getBogoDiscount(product);
-//     case "bulk":
-//       return getBulkDiscount(product);
-//     default:
-//       return null;
-//   }
-// };
-
-// // (Sean Rivard-Morton) bogo is 'buy one get one'
-// const getBogoDiscount = ({ quantity, cost, discount, name }: any) => {
-//   const discountable = Math.floor(quantity / discount.amount);
-//   const displayText = `${name} ${discount.amount} for ${discount.for}`;
-//   return { displayText, savings: (discountable * cost).toFixed(2) };
-// };
-
-// // (Sean Rivard-Morton) I was considering naming it 'multibuy' because 2 doesn't really
-// // seem to qualify for 'bulk'
-// const getBulkDiscount = (product: any) => {
-//   const discountable = Math.floor(product.quantity / product.discount.amount);
-//   const discountedCost = discountable * product.discount.salePrice;
-//   const totalCost = discountable * (product.cost * product.discount.amount);
-//   const displayText = `${product.name} ${product.discount.amount} for ${discountedCost}`;
-//   return { displayText, savings: totalCost - discountedCost };
-// };
+export const getTotalToPay = (basket: Basket) => {
+  const subTotal = getSubtotal(basket);
+  const discountedtotal = getDiscountedTotal(basket);
+  return subTotal - discountedtotal;
+};

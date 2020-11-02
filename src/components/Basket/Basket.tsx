@@ -7,7 +7,8 @@ import {
   parseProductPrice,
   getSubtotal,
   getAppliedDiscounts,
-  // getProductDiscount,
+  getDiscountedTotal,
+  getTotalToPay,
 } from "./basketUtilities";
 
 const BasketPaper = styled(Paper)`
@@ -48,7 +49,6 @@ const ItemizedReceipt = ({ basket }: { basket: any }) => {
 
 const AppliedDiscountsList = ({ basket }: { basket: BasketInterface }) => {
   const appliedDiscounts: any = getAppliedDiscounts(basket);
-  console.log(appliedDiscounts);
   return (
     <>
       {appliedDiscounts.map((discount: any, index: number) => {
@@ -65,7 +65,8 @@ const AppliedDiscountsList = ({ basket }: { basket: BasketInterface }) => {
 
 export const Basket = ({ basket }: { basket: BasketInterface }) => {
   const subTotal = getSubtotal(basket).toFixed(2);
-
+  const discountedTotal = getDiscountedTotal(basket).toFixed(2);
+  const totalToPay = getTotalToPay(basket).toFixed(2);
   return (
     <BasketPaper variant="outlined">
       Your Basket
@@ -78,6 +79,16 @@ export const Basket = ({ basket }: { basket: BasketInterface }) => {
         </li>
         <li>Savings</li>
         <AppliedDiscountsList basket={basket} />
+        ------
+        <li data-testid={`total savings ${subTotal}`}>
+          <span className="title">Total savings</span>
+          {discountedTotal}
+        </li>
+        ---------------------------
+        <li data-testid={`total savings ${subTotal}`}>
+          <span className="title">Total to Pay</span>
+          {totalToPay}
+        </li>
       </BasketUnorderedList>
     </BasketPaper>
   );
