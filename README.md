@@ -37,3 +37,23 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
   - display cost
   - applicable discounts
   - total amount to pay
+
+## Aknowledgements
+
+- I think, if I were to do it again, I'd try and push each item to a basket array, and have a really simple 'receipt' component.
+
+- Obviously there's more clean up to be done, but I don't want to
+
+- First time using react-material, it's alright
+
+- First time using immer, the provided hooks are cool.
+
+- Probably could have broken up the testing a lot more. instead of writing happy path in the beginning. and achieving it near the end.
+
+- Should have tested more scenarios.
+
+- I think I could have achieved better composition
+
+- I made the assumption that shopping data would have discount information attached. If that's not the case I'd just do a lookup.
+
+-
