@@ -48,12 +48,15 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 - First time using immer, the provided hooks are cool.
 
-- Probably could have broken up the testing a lot more. instead of writing happy path in the beginning. and achieving it near the end.
+- Could have broken up the testing a lot more. instead of writing happy path in the beginning. and achieving it near the end.
+
+- When it comes to testing, I very much agree with Kent C Dodds's ethos (although I admit I could have done more)
+
+  - [Write fewer, longer tests](https://kentcdodds.com/blog/write-fewer-longer-tests)
+  - [Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)
 
 - Should have tested more scenarios.
 
 - I think I could have achieved better composition
 
 - I made the assumption that shopping data would have discount information attached. If that's not the case I'd just do a lookup.
-
-- Try not to imagine 'any' types, and instead the types are perfect.
