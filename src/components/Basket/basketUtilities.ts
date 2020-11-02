@@ -1,4 +1,4 @@
-import { BasketProduct, Basket, Product } from "../../types";
+import { BasketProduct, Basket } from "../../types";
 
 export const parseProductPrice = ({
   name,
@@ -6,7 +6,7 @@ export const parseProductPrice = ({
   cost,
 }: BasketProduct): { description: string; price: number } => {
   if (typeof cost === "number") return { description: name, price: cost };
-  const price = Math.round(quantity * cost.amount * 100) / 100;
+  const price = Math.round(Number(quantity) * cost.amount * 100) / 100;
   const description = `${name} ${quantity} ${cost.per.toUpperCase()} @ ${
     cost.amount
   }/${cost.per.toUpperCase()} `;
@@ -20,6 +20,8 @@ export const getSubtotal = (basket: Basket): number => {
   return Object.values(basket).reduce((acc: number, cur: any) => {
     if (typeof cur.cost === "number") {
       acc += cur.cost * cur.quantity;
+    } else {
+      acc += cur.cost.amount * cur.quantity;
     }
     return acc;
   }, 0);
@@ -37,7 +39,7 @@ const discountLookup: any = {
     const discountable = Math.floor(product.quantity / discount.amount);
     const discountedCost = discountable * discount.for;
     const totalCost = discountable * (product.cost * discount.amount);
-    const description = `${product.name} ${discount.amount} for ${discountedCost}`;
+    const description = `${product.name} ${discount.amount} for £${discountedCost}`;
     return { description, savings: totalCost - discountedCost };
   },
 };

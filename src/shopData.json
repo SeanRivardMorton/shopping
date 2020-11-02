@@ -24,7 +24,7 @@
   "003": {
     "name": "Hand Sanitizer",
     "cost": {
-      "per": 1,
+      "per": "l",
       "amount": 19.99
     }
   }

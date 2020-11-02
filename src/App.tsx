@@ -28,6 +28,7 @@ function App() {
           <Grid container spacing={3}>
             <Grid item lg={7} xs={12}>
               <ProductGallery
+                basket={basket}
                 dispatchBasket={dispatchBasket}
                 products={productData}
               />

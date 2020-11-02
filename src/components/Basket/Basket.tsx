@@ -32,16 +32,17 @@ const ItemizedReceipt = ({ basket }: { basket: any }) => {
   return (
     <>
       {Object.entries(basket).map(([id, product]: [string, any]) => {
-        if (product.quantity < 1) return null;
         const parsedProduct = parseProductPrice(product);
-        return [...Array(product.quantity)].map((_, index) => {
-          return (
-            <li key={`${id}-${index}`}>
-              <span className="title">{parsedProduct.description}</span>
-              {parsedProduct.price.toFixed(2)}
-            </li>
-          );
-        });
+        return [...Array(product.quantity > 1 ? product.quantity : 1)].map(
+          (_, index) => {
+            return (
+              <li key={`${id}-${index}`}>
+                <span className="title">{parsedProduct.description}</span>
+                {parsedProduct.price.toFixed(2)}
+              </li>
+            );
+          }
+        );
       })}
     </>
   );
@@ -53,8 +54,13 @@ const AppliedDiscountsList = ({ basket }: { basket: BasketInterface }) => {
     <>
       {appliedDiscounts.map((discount: any, index: number) => {
         return (
-          <li key={`${discount.id}-${index}`}>
-            <span className="title">{discount.description}</span>
+          <li
+            data-testid={`${discount.description} -${discount.savings.toFixed(
+              2
+            )}`}
+            key={`${discount.id}-${index}`}
+          >
+            <span className="title">{discount.description}</span>-
             {discount.savings.toFixed(2)}
           </li>
         );
@@ -80,12 +86,12 @@ export const Basket = ({ basket }: { basket: BasketInterface }) => {
         <li>Savings</li>
         <AppliedDiscountsList basket={basket} />
         ------
-        <li data-testid={`total savings ${subTotal}`}>
+        <li data-testid={`total savings -${discountedTotal}`}>
           <span className="title">Total savings</span>
           {discountedTotal}
         </li>
         ---------------------------
-        <li data-testid={`total savings ${subTotal}`}>
+        <li data-testid={`Total to Pay ${totalToPay}`}>
           <span className="title">Total to Pay</span>
           {totalToPay}
         </li>

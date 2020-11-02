@@ -7,10 +7,12 @@ import {
   Typography,
   IconButton,
 } from "@material-ui/core";
-import { Products, Cost } from "../../types";
+import { Cost } from "../../types";
 import styled from "styled-components";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import { ProductByUnitActions } from "./ProductByUnitActions";
+import { ProductByVolumeActions } from "./ProductByVolumeActions";
 
 const ProductCard = styled(Card)`
   ${({ theme }) => `
@@ -29,9 +31,11 @@ const parseCost = (cost: Cost): number | string => {
 
 export const ProductGallery = ({
   products,
+  basket,
   dispatchBasket,
 }: {
   products: any;
+  basket: any;
   dispatchBasket: any;
 }) => {
   return (
@@ -46,30 +50,20 @@ export const ProductGallery = ({
                 </Typography>
                 <Typography>{parseCost(product.cost)}</Typography>
               </CardContent>
-              <CardActions>
-                <IconButton
-                  title={`add ${product.name}`}
-                  aria-label="add"
-                  onClick={() =>
-                    dispatchBasket({ key: id, type: "ADD", payload: product })
-                  }
-                >
-                  <AddIcon />
-                </IconButton>
-                <IconButton
-                  title={`remove ${product.name}`}
-                  aria-label="remove"
-                  onClick={() =>
-                    dispatchBasket({
-                      key: id,
-                      type: "REMOVE",
-                      payload: product,
-                    })
-                  }
-                >
-                  <RemoveIcon />
-                </IconButton>
-              </CardActions>
+              {typeof product.cost === "number" ? (
+                <ProductByUnitActions
+                  id={id}
+                  product={product}
+                  dispatchBasket={dispatchBasket}
+                />
+              ) : (
+                <ProductByVolumeActions
+                  id={id}
+                  basket={basket}
+                  product={product}
+                  dispatchBasket={dispatchBasket}
+                />
+              )}
             </ProductCard>
           </Grid>
         );

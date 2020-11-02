@@ -9,6 +9,9 @@ const reducer = (draft: any, action: any) => {
       };
       draft[action.key].quantity += 1;
       return draft;
+    case "VOLUME_ADD":
+      draft[action.key].quantity = Number(action.payload);
+      return draft;
     case "REMOVE":
       draft[action.key] = {
         ...action.payload,
