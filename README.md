@@ -56,4 +56,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 - I made the assumption that shopping data would have discount information attached. If that's not the case I'd just do a lookup.
 
--
+- Try not to imagine 'any' types, and instead the types are perfect.
